@@ -69,14 +69,14 @@ class SharedMemoryManager:
 # --- 실행 예시 ---
 def main():
     fields_config = {
-        'joint': (6, np.float32),
+        'joint': (6, np.float32), # 24
         'status': (20, str)  # 20바이트 크기 문자열
     }
 
     # 1. 생성 및 쓰기
     shm = SharedMemoryManager(name='test_shm2', fields_config=fields_config)
-    # shm.set('joint', [1.1, 2.2, 3.3, 4.4, 5.5, 6.6])
-    # shm.set('status', 'running')
+    shm.set('joint', [1.1, 2.2, 3.3, 4.4, 5.5, 6.6])
+    shm.set('status', 'running')
 
     # 2. 읽기 (get 메서드 사용)
     joint_data = shm.get('joint')

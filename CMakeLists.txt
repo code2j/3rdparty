@@ -11,12 +11,15 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -march=native -ffast-math") # Eigen 
 
 
 if (PROJECT_IS_TOP_LEVEL)
-    add_executable(example_shared_memory example/shared_memory/example_shm.cpp) # shared mem
-    target_include_directories(example_shared_memory PRIVATE 3rdparty)          # shared mem
-    add_executable(example_yaml example/yaml/example_yaml.cpp)  # yaml
-    target_include_directories(example_yaml PRIVATE 3rdparty)   # yaml
-    add_executable(example_server example/socket/example_server.cpp) # socket
-    target_include_directories(example_server PRIVATE 3rdparty)      # socket
-    add_executable(example_client example/socket/example_client.cpp) # socket
-    target_include_directories(example_client PRIVATE 3rdparty)      # socket
+    # 공유 메모리 Shared Memory
+    add_executable(example_shared_memory shared_memory/example_shm.cpp)
+
+    # yaml
+    add_executable(example_yaml yaml/example_yaml.cpp)
+
+    # socket server
+    add_executable(example_server socket/example_server.cpp)
+
+    # socket client
+    add_executable(example_client socket/example_client.cpp)
 endif()

@@ -55,8 +55,6 @@ def SLEEP():
 
 # --- 사용 예제 ---
 if __name__ == "__main__":
-
-
     start_time = time.time()
     try:
         while True:

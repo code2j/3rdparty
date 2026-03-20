@@ -1,6 +1,8 @@
 from multiprocessing import Process, Manager
 import time
 
+
+
 # 서로 다른 작업 함수들
 def task_a(shared):
     while True:
@@ -21,18 +23,18 @@ if __name__ == "__main__":
             'b_status': "대기"
         })
 
-    # 1. 프로세스들을 딕셔너리로 관리
+    # 프로세스 생성
     workers = {}
     workers["counter_worker"] = Process(target=task_a, args=(shared,))
     workers["status_worker"]  = Process(target=task_b, args=(shared,))
 
 
-    # 2. 반복문으로 일괄 시작
+    # 시작
     for name, p in workers.items():
         print(f"[{name}] 시작 중...")
         p.start()
 
-    # 3. 메인 로직 (데이터 확인)
+    # 메인 로직 (데이터 확인)
     try:
         for _ in range(50):
             print(f"실시간 데이터: {dict(shared)}")
@@ -40,7 +42,7 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         pass
 
-    # 4. 반복문으로 일괄 종료
+    # 반복문으로 일괄 종료
     print("\n[시스템 종료]")
     for name, p in workers.items():
         p.terminate()
